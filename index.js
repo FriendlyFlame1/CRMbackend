@@ -8,8 +8,7 @@ app.use(express.json());
 
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://yashgoel:AXWPUySjhdIzYUvd@cluster0.9hgkis6.mongodb.net/?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+ 
 })
 .then(() => console.log('MongoDB Atlas connected successfully')) // Log successful connection
 .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
