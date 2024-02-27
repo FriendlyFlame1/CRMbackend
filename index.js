@@ -2,10 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
+const bodyParser = require('body-parser');
 
 app.use(cors());
 app.use(express.json());
-
+app.use(bodyParser.json());
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://yashgoel:AXWPUySjhdIzYUvd@cluster0.9hgkis6.mongodb.net/?retryWrites=true&w=majority', {
  
@@ -14,24 +15,29 @@ mongoose.connect('mongodb+srv://yashgoel:AXWPUySjhdIzYUvd@cluster0.9hgkis6.mongo
 .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
 
 // Define Schema
-const dataSchema = new mongoose.Schema({
-  // Define your schema fields here
-  _id: mongoose.Schema.Types.ObjectId,
-  name: String,
-  age: Number,
-  gender: String,
-  city: String,
-  country: String,
-  occupation: String
+const dealSchema = new mongoose.Schema({
+  dealOwner: String,
+  dealName: String,
+  accountName: String,
+  type: String,
+  nextStep: String,
+  leadSource: String,
+  contactName: String,
+  amount: String,
+  closingDate: String,
+  stage: String,
+  probability: String,
+  expectedRevenue: String,
+  campaignSource: String,
 });
 
 // Define Model
-const DataModel = mongoose.model('Data', dataSchema);
+const Deal = mongoose.model('Deal', dealSchema);
 
 // API Endpoint to fetch data
-app.get('/api/data', async (req, res) => {
+app.get('/api/deals', async (req, res) => {
   try {
-    const data = await DataModel.find(); // Fetch all data from MongoDB Atlas
+    const data = await Deal.find(); // Fetch all data from MongoDB Atlas
     res.json(data);
     console.log('Fetched data:', response.data);
   } catch (error) {
@@ -39,5 +45,15 @@ app.get('/api/data', async (req, res) => {
   }
 });
 
+app.post('/api/deals', async (req, res) => {
+  try {
+    const deal = new Deal(req.body);
+    await deal.save();
+    res.status(201).send(deal);
+  } catch (error) {
+    console.error('Error saving deal:', error);
+    res.status(500).send('Error saving deal.');
+  }
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
