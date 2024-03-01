@@ -23,7 +23,7 @@ const dealSchema = new mongoose.Schema({
   nextStep: String,
   leadSource: String,
   contactName: String,
-  amount: String,
+  amount: Number,
   closingDate: String,
   stage: String,
   probability: String,
