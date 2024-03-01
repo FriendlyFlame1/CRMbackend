@@ -29,6 +29,7 @@ const dealSchema = new mongoose.Schema({
   probability: String,
   expectedRevenue: String,
   campaginSource: String,
+  description: String,
 });
 
 // Define Model
