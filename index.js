@@ -60,7 +60,7 @@ app.post('/api/deals', async (req, res) => {
   }
 });
 app.get('/api/deals/:id', async (req, res) => {
-  const { id } = req.params;
+  const { _id } = req.params;
 
   try {
     const deal = await Deal.findById(_id);
