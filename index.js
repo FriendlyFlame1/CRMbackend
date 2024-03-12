@@ -63,7 +63,7 @@ app.get('/api/deals/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deal = await Deal.findById(id);
+    const deal = await Deal.findById(_id);
     if (!deal) {
       return res.status(404).json({ error: 'Deal not found' });
     }
