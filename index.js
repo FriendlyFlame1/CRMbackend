@@ -59,5 +59,36 @@ app.post('/api/deals', async (req, res) => {
     res.status(500).send('Error saving deal.');
   }
 });
+app.get('/api/deals/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deal = await Deal.findById(id);
+    if (!deal) {
+      return res.status(404).json({ error: 'Deal not found' });
+    }
+    res.json(deal);
+  } catch (error) {
+    console.error('Error fetching deal details:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// API Endpoint to update deal details by ID
+app.put('/api/deals/:id', async (req, res) => {
+  const { id } = req.params;
+  const newData = req.body;
+
+  try {
+    const deal = await Deal.findByIdAndUpdate(id, newData, { new: true });
+    if (!deal) {
+      return res.status(404).json({ error: 'Deal not found' });
+    }
+    res.json(deal);
+  } catch (error) {
+    console.error('Error updating deal details:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
