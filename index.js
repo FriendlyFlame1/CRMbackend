@@ -41,7 +41,7 @@ const Deal = mongoose.model('Deal', dealSchema);
 // API Endpoint to fetch data
 app.get('/api/deals', async (req, res) => {
   try {
-    const data = await Deal.find(); // Fetch all data from MongoDB Atlas
+    const data = await Deal.find({ dealOwner: "SM1" }); // Fetch all data from MongoDB Atlas
     res.json(data);
     console.log('Fetched data:', response.data);
   } catch (error) {
