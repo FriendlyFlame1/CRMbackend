@@ -43,7 +43,7 @@ app.get('/api/deals', async (req, res) => {
   try {
     const data = await Deal.find({ dealOwner: "SM2" }); // Fetch all data from MongoDB Atlas
     res.json(data);
-    console.log('Fetched data:', response.data);
+    
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
