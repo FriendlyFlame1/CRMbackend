@@ -31,7 +31,7 @@ const dealSchema = new mongoose.Schema({
   stage: String,
   probability: String,
   expectedRevenue: String,
-  campaginSource: String,
+  campaignSource: String,
   description: String,
 });
 
