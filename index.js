@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://yashgoel:AXWPUySjhdIzYUvd@cluster0.9hgkis6.mongo
 
 // Define Schema
 const dealSchema = new mongoose.Schema({
-  _id: String,
+  
   dealOwner: String,
   dealName: String,
   accountName: String,
